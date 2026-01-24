@@ -1,246 +1,184 @@
 import 'package:flutter/material.dart';
-import 'home_screen.dart';       // Ensure these files exist in your screens folder
+import 'home_screen.dart';
 import 'register_screen.dart';
 import 'forgotpw_screen.dart';
 
 class LoginScreen extends StatelessWidget {
+  const LoginScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffe6e6e6),
+      backgroundColor: Colors.transparent, // Let the container gradient show
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
-        elevation: 4,
-        centerTitle: false,
+        elevation: 0,
+        centerTitle: true,
         automaticallyImplyLeading: false,
-        backgroundColor: Color(0xff3a57e8),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.zero,
-        ),
-        title: Text(
-          "FoodieGlobe",
-          style: TextStyle(
-            fontWeight: FontWeight.w400,
-            fontStyle: FontStyle.normal,
-            fontSize: 14,
-            color: Color(0xffffffff), // Changed to white for better visibility
-          ),
-        ),
+        backgroundColor: Colors.transparent,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Color(0xffffffff), size: 24),
+          icon: const Icon(Icons.arrow_back, color: Colors.white, size: 24),
           onPressed: () => Navigator.pop(context),
         ),
+        title: const Text(
+          "Login",
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.white),
+        ),
       ),
-      body: Stack(
-        alignment: Alignment.topLeft,
-        children: [
-          Container(
-            margin: EdgeInsets.all(0),
-            padding: EdgeInsets.all(0),
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height * 0.35,
-            decoration: BoxDecoration(
-              color: Color(0xff3a57e8),
-              shape: BoxShape.rectangle,
-              borderRadius: BorderRadius.zero,
-              border: Border.all(color: Color(0x4d9e9e9e), width: 1),
-            ),
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        decoration: const BoxDecoration(
+          // Midnight Navy Radial Gradient matching the Home Screen
+          gradient: RadialGradient(
+            center: Alignment(0.8, -0.6),
+            radius: 1.5,
+            colors: [
+              Color(0xFF1A1A2E), // Midnight Navy
+              Color(0xFF05050A), // Deep Space
+            ],
           ),
-          Container(
-            margin: EdgeInsets.fromLTRB(20, 10, 20, 20),
-            padding: EdgeInsets.all(0),
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            decoration: BoxDecoration(
-              color: Color(0xffffffff),
-              shape: BoxShape.rectangle,
-              borderRadius: BorderRadius.circular(16.0),
-              border: Border.all(color: Color(0x4d9e9e9e), width: 1),
-            ),
+        ),
+        child: SafeArea(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: EdgeInsets.all(16),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Image(
-                          image: NetworkImage(
-                              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoSL4WHG5Ypv4e4W58d5Gt4PnBEM_kZQDDhAKjZAOYLBy6V1karPn2SMil6DFkjUUeX7M&usqp=CAU"),
-                          height: 100,
-                          width: 100,
-                          fit: BoxFit.cover,
-                        ),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            "Login",
-                            textAlign: TextAlign.start,
-                            overflow: TextOverflow.clip,
-                            style: TextStyle(
-                              fontWeight: FontWeight.w700,
-                              fontStyle: FontStyle.normal,
-                              fontSize: 22,
-                              color: Color(0xff000000),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(vertical: 16, horizontal: 0),
-                          child: TextField(
-                            obscureText: false,
-                            textAlign: TextAlign.left,
-                            maxLines: 1,
-                            style: TextStyle(
-                              fontWeight: FontWeight.w400,
-                              fontStyle: FontStyle.normal,
-                              fontSize: 14,
-                              color: Color(0xff000000),
-                            ),
-                            decoration: InputDecoration(
-                              enabledBorder: UnderlineInputBorder(
-                                borderRadius: BorderRadius.circular(4.0),
-                                borderSide: BorderSide(color: Color(0xff000000), width: 1),
-                              ),
-                              hintText: "Enter Email",
-                              hintStyle: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontStyle: FontStyle.normal,
-                                fontSize: 14,
-                                color: Color(0xff494646),
-                              ),
-                              filled: true,
-                              fillColor: Color(0xffffffff),
-                              contentPadding: EdgeInsets.all(0),
-                            ),
-                          ),
-                        ),
-                        TextField(
-                          obscureText: true, // Changed to true for passwords
-                          textAlign: TextAlign.start,
-                          maxLines: 1,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w400,
-                            fontStyle: FontStyle.normal,
-                            fontSize: 14,
-                            color: Color(0xff000000),
-                          ),
-                          decoration: InputDecoration(
-                            enabledBorder: UnderlineInputBorder(
-                              borderRadius: BorderRadius.circular(4.0),
-                              borderSide: BorderSide(color: Color(0xff000000), width: 1),
-                            ),
-                            hintText: "Enter Password",
-                            hintStyle: TextStyle(
-                              fontWeight: FontWeight.w400,
-                              fontStyle: FontStyle.normal,
-                              fontSize: 14,
-                              color: Color(0xff494646),
-                            ),
-                            filled: true,
-                            fillColor: Color(0xffffffff),
-                            contentPadding: EdgeInsets.all(0),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(0, 16, 0, 30),
-                          child: Align(
-                            alignment: Alignment.centerRight,
-                            child: GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => FrogotPWScreen()),
-                                );
-                              },
-                              child: Text(
-                                "Forgot Password?",
-                                textAlign: TextAlign.start,
-                                overflow: TextOverflow.clip,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w700,
-                                  fontStyle: FontStyle.normal,
-                                  fontSize: 14,
-                                  color: Color(0xff3a57e8),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        MaterialButton(
-                          onPressed: () {
-                            // Navigate to Home and clear the stack
-                            Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(builder: (context) => HomeScreen()),
-                              (route) => false,
-                            );
-                          },
-                          color: Color(0xff3a57e8),
-                          elevation: 0,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16.0),
-                          ),
-                          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                          child: Text(
-                            "Login",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700,
-                              fontStyle: FontStyle.normal,
-                            ),
-                          ),
-                          textColor: Color(0xffffffff),
-                          height: 40,
-                          minWidth: MediaQuery.of(context).size.width,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(0, 8, 0, 0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Text(
-                                "Don't have an account? ",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 14,
-                                  color: Color(0xff000000),
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context) => RegisterScreen()),
-                                  );
-                                },
-                                child: Text(
-                                  "SignUp",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 14,
-                                    color: Color(0xff3a57e8),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
+                const SizedBox(height: 40),
+                // Header Section
+                const Text(
+                  "Welcome Back",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 34,
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: -0.5,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                const Text(
+                  "Sign in to continue your journey.",
+                  style: TextStyle(color: Colors.white70, fontSize: 16),
+                ),
+                const SizedBox(height: 48),
+
+                // Email Field
+                _buildTextField(
+                  hint: "Email Address",
+                  icon: Icons.mail_outline,
+                  obscure: false,
+                ),
+                const SizedBox(height: 20),
+
+                // Password Field
+                _buildTextField(
+                  hint: "Password",
+                  icon: Icons.lock_outline,
+                  obscure: true,
+                ),
+
+                // Forgot Password Link
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                    onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const FrogotPWScreen()),
+                    ),
+                    child: const Text(
+                      "Forgot Password?",
+                      style: TextStyle(
+                        color: Color(0xFFFFB703), // Gold accent
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
+                ),
+                const SizedBox(height: 32),
+
+                // Login Button with Glow Shadow
+                Container(
+                  width: double.infinity,
+                  height: 58,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    boxShadow: [
+                      BoxShadow(
+                        color: const Color(0xFF7373EB).withOpacity(0.3),
+                        blurRadius: 15,
+                        offset: const Offset(0, 5),
+                      ),
+                    ],
+                  ),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (context) => const HomeScreen()),
+                        (route) => false,
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF7373EB), 
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                      elevation: 0,
+                    ),
+                    child: const Text(
+                      "LOGIN",
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, letterSpacing: 1.1),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 24),
+
+                // Footer: Toggle to Sign Up
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text("Don't have an account? ", style: TextStyle(color: Colors.white70)),
+                    GestureDetector(
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const RegisterScreen()),
+                      ),
+                      child: const Text(
+                        "Sign Up",
+                        style: TextStyle(
+                          color: Color(0xFFFFB703),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
           ),
-        ],
+        ),
+      ),
+    );
+  }
+
+  // Updated glassmorphic text fields helper
+  Widget _buildTextField({required String hint, required IconData icon, required bool obscure}) {
+    return Container(
+      decoration: BoxDecoration(
+        color: const Color(0xFF1A1A1C).withOpacity(0.5), // Semi-transparent glass
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: Colors.white10), // Subtle cosmic border
+      ),
+      child: TextField(
+        obscureText: obscure,
+        style: const TextStyle(color: Colors.white),
+        decoration: InputDecoration(
+          hintText: hint,
+          hintStyle: const TextStyle(color: Colors.white38),
+          prefixIcon: Icon(icon, color: const Color(0xFFFFB703), size: 22),
+          border: InputBorder.none,
+          contentPadding: const EdgeInsets.symmetric(vertical: 18),
+        ),
       ),
     );
   }

@@ -3,253 +3,170 @@ import 'home_screen.dart';
 import 'login_screen.dart';
 
 class RegisterScreen extends StatelessWidget {
+  const RegisterScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffe6e6e6),
+      backgroundColor: Colors.transparent, // Let gradient show
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
         elevation: 0,
-        centerTitle: false,
+        centerTitle: true,
         automaticallyImplyLeading: false,
-        backgroundColor: const Color(0xff3d5ae8),
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.zero,
-        ),
-        title: const Text(
-          "FoodieGlobe",
-          style: TextStyle(
-            fontWeight: FontWeight.w700,
-            fontStyle: FontStyle.normal,
-            fontSize: 18,
-            color: Color(0xffffffff), // Changed to white for better visibility
-          ),
-        ),
-        // Added Navigation functionality to the back button
+        backgroundColor: Colors.transparent,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white, size: 24),
           onPressed: () => Navigator.pop(context),
         ),
+        title: const Text(
+          "Create Account",
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 18),
+        ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              const Image(
-                image: NetworkImage(
-                    "https://cdn1.iconfinder.com/data/icons/borrow-book-flat/340/device_tablet_register_login_member_user-256.png"),
-                height: 100,
-                width: 100,
-                fit: BoxFit.cover,
-              ),
-              const Padding(
-                padding: EdgeInsets.fromLTRB(0, 16, 0, 0),
-                child: Text(
-                  "Let's Get Started!",
-                  textAlign: TextAlign.start,
-                  overflow: TextOverflow.clip,
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        decoration: const BoxDecoration(
+          // Consistent Midnight Navy Radial Gradient
+          gradient: RadialGradient(
+            center: Alignment(0.8, -0.6),
+            radius: 1.5,
+            colors: [
+              Color(0xFF1A1A2E), // Midnight Navy
+              Color(0xFF05050A), // Deep Space
+            ],
+          ),
+        ),
+        child: SafeArea(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 20),
+                // Header Section
+                const Text(
+                  "Join the Globe",
                   style: TextStyle(
-                    fontWeight: FontWeight.w700,
-                    fontStyle: FontStyle.normal,
-                    fontSize: 22,
-                    color: Color(0xff3a57e8),
+                    color: Colors.white,
+                    fontSize: 34,
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: -0.5,
                   ),
                 ),
-              ),
-              const Padding(
-                padding: EdgeInsets.fromLTRB(0, 8, 0, 0),
-                child: Text(
-                  "Create an account and start creating.",
-                  textAlign: TextAlign.center,
-                  overflow: TextOverflow.clip,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontStyle: FontStyle.normal,
-                    fontSize: 14,
-                    color: Color(0xff000000),
-                  ),
+                const SizedBox(height: 8),
+                const Text(
+                  "Create an account to start your journey.",
+                  style: TextStyle(color: Colors.white70, fontSize: 16),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 40, 0, 0),
-                child: TextField(
-                  obscureText: false,
-                  textAlign: TextAlign.start,
-                  maxLines: 1,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 14,
-                    color: Color(0xff000000),
+                const SizedBox(height: 32),
+
+                // Input Fields
+                _buildTextField(hint: "Full Name", icon: Icons.person_outline),
+                const SizedBox(height: 16),
+                _buildTextField(hint: "Email Address", icon: Icons.mail_outline),
+                const SizedBox(height: 16),
+                _buildTextField(hint: "Password", icon: Icons.lock_outline, isPassword: true),
+                const SizedBox(height: 16),
+                _buildTextField(hint: "Confirm Password", icon: Icons.lock_reset_outlined, isPassword: true),
+                
+                const SizedBox(height: 40),
+
+                // Register Button with Shadow Glow
+                Container(
+                  width: double.infinity,
+                  height: 58,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    boxShadow: [
+                      BoxShadow(
+                        color: const Color(0xFF7373EB).withOpacity(0.3),
+                        blurRadius: 15,
+                        offset: const Offset(0, 5),
+                      ),
+                    ],
                   ),
-                  decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                      borderSide: const BorderSide(color: Color(0xff3a57e8), width: 1),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (context) => const HomeScreen()),
+                        (route) => false,
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF7373EB), 
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                      elevation: 0,
                     ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                      borderSide: const BorderSide(color: Color(0xff3a57e8), width: 2),
-                    ),
-                    hintText: "Name",
-                    hintStyle: const TextStyle(color: Color(0xff000000)),
-                    filled: true,
-                    fillColor: const Color(0xffffffff),
-                    contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-                    prefixIcon: const Icon(Icons.person, color: Color(0xff212435), size: 24),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
-                child: TextField(
-                  obscureText: false,
-                  textAlign: TextAlign.start,
-                  maxLines: 1,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 14,
-                    color: Color(0xff000000),
-                  ),
-                  decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                      borderSide: const BorderSide(color: Color(0xff3a57e8), width: 1),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                      borderSide: const BorderSide(color: Color(0xff3a57e8), width: 2),
-                    ),
-                    hintText: "Email Address",
-                    hintStyle: const TextStyle(color: Color(0xff000000)),
-                    filled: true,
-                    fillColor: const Color(0xffffffff),
-                    contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-                    prefixIcon: const Icon(Icons.mail, color: Color(0xff212435), size: 24),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
-                child: TextField(
-                  obscureText: true, // Hide password input
-                  textAlign: TextAlign.start,
-                  maxLines: 1,
-                  decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                      borderSide: const BorderSide(color: Color(0xff3a57e8), width: 1),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                      borderSide: const BorderSide(color: Color(0xff3a57e8), width: 2),
-                    ),
-                    hintText: "Password",
-                    filled: true,
-                    fillColor: const Color(0xffffffff),
-                    prefixIcon: const Icon(Icons.lock, color: Color(0xff212435), size: 24),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
-                child: TextField(
-                  obscureText: true, // Hide confirm password input
-                  textAlign: TextAlign.start,
-                  maxLines: 1,
-                  decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                      borderSide: const BorderSide(color: Color(0xff3a57e8), width: 1),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                      borderSide: const BorderSide(color: Color(0xff3a57e8), width: 2),
-                    ),
-                    hintText: "Confirm Password",
-                    filled: true,
-                    fillColor: const Color(0xffffffff),
-                    prefixIcon: const Icon(Icons.lock_outline, color: Color(0xff212435), size: 24),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
-                child: MaterialButton(
-                  onPressed: () {
-                    // Navigate to Home and clear the login stack
-                    Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(builder: (context) => const HomeScreen()),
-                      (route) => false,
-                    );
-                  },
-                  color: const Color(0xff3a57e8),
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  padding: const EdgeInsets.all(16),
-                  textColor: const Color(0xffffffff),
-                  height: 45,
-                  minWidth: MediaQuery.of(context).size.width,
-                  child: const Text(
-                    "Sign Up",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
+                    child: const Text(
+                      "SIGN UP",
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, letterSpacing: 1.1),
                     ),
                   ),
                 ),
-              ),
-              const Padding(
-                padding: EdgeInsets.fromLTRB(0, 30, 0, 0),
-                child: Text(
-                  "By creating an account or continuing to use FoodieGlobe, you acknowledge and agree that you have accepted the Terms of Services and have reviewed the Privacy Policy.",
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 12,
-                    color: Color(0xff807d7d),
+
+                const SizedBox(height: 24),
+                
+                // Terms and Privacy
+                const Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    "By creating an account, you agree to our Terms of Service and Privacy Policy.",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.white38, fontSize: 12),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
-                child: Row(
+
+                const SizedBox(height: 32),
+
+                // Already have an account?
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
-                      "Already have an account?",
-                      style: TextStyle(fontSize: 14, color: Color(0xff000000)),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
-                      child: GestureDetector(
-                        onTap: () {
-                          // Navigate to Login Screen
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => LoginScreen()),
-                          );
-                        },
-                        child: const Text(
-                          "Sign In",
-                          style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 14,
-                            color: Color(0xff3a57e8),
-                          ),
+                    const Text("Already have an account? ", style: TextStyle(color: Colors.white70)),
+                    GestureDetector(
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const LoginScreen()),
+                      ),
+                      child: const Text(
+                        "Sign In",
+                        style: TextStyle(
+                          color: Color(0xFFFFB703), // Gold accent
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
                   ],
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
+        ),
+      ),
+    );
+  }
+
+  // Helper method updated for Midnight theme
+  Widget _buildTextField({required String hint, required IconData icon, bool isPassword = false}) {
+    return Container(
+      decoration: BoxDecoration(
+        color: const Color(0xFF1A1A1C).withOpacity(0.5), // Semi-transparent for glass effect
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: Colors.white10), // Subtle border
+      ),
+      child: TextField(
+        obscureText: isPassword,
+        style: const TextStyle(color: Colors.white),
+        decoration: InputDecoration(
+          hintText: hint,
+          hintStyle: const TextStyle(color: Colors.white24),
+          prefixIcon: Icon(icon, color: const Color(0xFFFFB703), size: 22),
+          border: InputBorder.none,
+          contentPadding: const EdgeInsets.symmetric(vertical: 18, horizontal: 16),
         ),
       ),
     );
