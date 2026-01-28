@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "338114903255",
+    "project_id": "foodieglobe-fa7a9",
+    "storage_bucket": "foodieglobe-fa7a9.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:338114903255:android:83f8717faa48781fbf4492",
+        "android_client_info": {
+          "package_name": "com.example.restaurant_globe"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyNOABCF-bkcL-zoGryly5PTYijxt5qTk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
